@@ -44,21 +44,30 @@ const Home = ({query, setQuery}) => {
     };
 
     const HandleaddToCart = (item) => {
-
-        // const updatedCart = [...cart, item];
-        // setCart(updatedCart);
+        let newCart = [...cart];
         dispatch(addToCart(item))
+        let itemInCart = newCart.some((i) => item.title === i.title);        
 
-        // localStorage.setItem('cart', JSON.stringify(updatedCart));
-        toast.success('Your item is added to the cart!', {
-            position: "top-right",
-            autoClose: 1000, 
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            // progress: undefined,
-            });
-            
+        if(itemInCart){
+            toast.warn('Item is already in cart!', {
+                position: "top-right",
+                autoClose: 1000,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+              });
+              return newCart;
+        }else
+        {
+            toast.success('Your item is added to the cart!', {
+                position: "top-right",
+                autoClose: 1000, 
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+ 
+                });
+        }   
     };
 
     return (
