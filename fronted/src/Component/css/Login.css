@@ -40,4 +40,11 @@
       width: 15px;
       margin-top: 10px;
     }
+    .eye{
+      position: relative;
+      top: -33px;
+      left: 143px;
+      font-size: 20px;
+      cursor: pointer;
+    }
   

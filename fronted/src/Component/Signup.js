@@ -1,7 +1,7 @@
 import axios from 'axios'
 import './css/Register.css';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 export const Signup = () => {
@@ -109,8 +109,7 @@ export const Signup = () => {
                                             <Form.Group className="mb-2" controlId="formBasicPassword">
                                                 <Form.Label>Confirm Password</Form.Label>
                                                 <Form.Control
-                                                    type="password"
-                                             
+                                                    type="text"
                                                     placeholder="Confirm Password"
                                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                                 />

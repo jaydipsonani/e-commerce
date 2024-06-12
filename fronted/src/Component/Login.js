@@ -1,20 +1,28 @@
 import axios from 'axios';
 import './css/Login.css';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import Navbar from './Navbar';
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+
 
 export const Login = () => {
 
     const navigate = useNavigate(' ')
-
     let [email, setemail] = useState('');
     let [password, setpassword] = useState('');
     let [type, setType] = useState('password')
     let [error, setError] = useState('');
+    const [token, setToken] = useState(localStorage.getItem('token'));
+
+    useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        navigate('/Home')
+      }
+    }, [])
 
     const show = () => {
-      type === "password" ? setType("text") : setType("password");
+      setType(type === "password"? "text" : "password")
     }
   
     const btnhandler = async (e) => {
@@ -28,6 +36,7 @@ export const Login = () => {
 
       if (response.data.status === "success") {
         localStorage.setItem('token', response.data.token);
+        setToken(response.data.token);
         navigate("/Home");
         
       }
@@ -75,15 +84,22 @@ export const Login = () => {
             </div>
             <div className="form-group mt-2">
               <label>Password</label>
+              <div>
+
               <input
                 type={type}
                 value={password}
                 onChange={(e) => { setpassword(e.target.value) }}
                 className="form-control mt-1"
                 placeholder="Enter password"
-              />
+                />
+                  {
+                    type === 'password' ? 
+                    <FaRegEye className='eye' onClick={show}></FaRegEye> : 
+                    <FaRegEyeSlash className='eye' onClick={show}></FaRegEyeSlash>
+                  }
+              </div>
 
-              <input className='input' onClick={show} type='checkbox'/> show password
 
             </div>
             <div className="d-grid gap-2 mt-2">

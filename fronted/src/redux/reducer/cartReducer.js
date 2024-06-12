@@ -37,7 +37,7 @@ const cartReducer = (state = initialState, action) => {
           ...state,
           items: decrementCart,
         };
-  
+
       case 'REMOVE_FROM_CART':
         const removedCart = [...state.items];
         if(window.confirm('Are you sure you want to delete this cart')){
@@ -47,11 +47,11 @@ const cartReducer = (state = initialState, action) => {
             ...state,
             items: removedCart,
         }
-        };
+        }
 
     default:
       return state;
-  }
+  };
 
 }
 
