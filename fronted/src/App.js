@@ -11,11 +11,12 @@ import { Login } from './Component/Login';
 import { Signup } from './Component/Signup';
 import { Forgot } from './Component/Forgot';
 import ProtectedRoute from './Component/ProtectedRoute';
+import Slider from './Component/Slider';
+import Footer from './Component/Footer';
 
 function App() {
 
   const [query, setQuery] = useState('')
-
   const router = createBrowserRouter([
 
     {
@@ -44,11 +45,16 @@ function App() {
        children: [
         {
           path: '/Home',
-          element: (<><Navbar query={query} setQuery={setQuery} /><Home query={query} setQuery={setQuery} /></>)
+          element: (<>
+          <Navbar query={query} setQuery={setQuery} />
+          <Slider></Slider>
+          <Home query={query} setQuery={setQuery} />
+          <Footer/>
+          </>)
         },
         {
           path: '/about',
-          element: (<><Navbar query={query} setQuery={setQuery} /><About /></>)
+          element: (<><Navbar query={query} setQuery={setQuery} /><About /><Footer/></>)
         },
         {
           path: '/service',
@@ -72,5 +78,3 @@ function App() {
 }
 
 export default App;
-
-

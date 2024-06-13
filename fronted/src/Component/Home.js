@@ -11,8 +11,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const Home = ({query, setQuery}) => {
-    
+const Home = ({ query, setQuery }) => {
+
     const [data, setData] = useState([])
 
     const cart = useSelector((state) => state.cart.items)
@@ -35,9 +35,9 @@ const Home = ({query, setQuery}) => {
         return (
             <span style={{ fontSize: "large" }}>
                 {[...Array(totalStars)].map((_, index) => (
-                    index < rating ? 
-                    <FaStar key={index} /> : 
-                    <CiStar key={index}  />
+                    index < rating ?
+                        <FaStar key={index} /> :
+                        <CiStar key={index} />
                 ))}
             </span>
         );
@@ -45,57 +45,57 @@ const Home = ({query, setQuery}) => {
 
     const HandleaddToCart = (item) => {
         let newCart = [...cart];
-        dispatch(addToCart(item))
-        let itemInCart = newCart.some((i) => item.title === i.title);        
+        let itemInCart = newCart.some((i) => item.title === i.title);
 
-        if(itemInCart){
+        if (itemInCart) {
             toast.warn('Item is already in cart!', {
                 position: "top-right",
                 autoClose: 1000,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
-              });
-              return newCart;
-        }else
-        {
+            });
+            return newCart;
+        } else {
+            dispatch(addToCart(item))
             toast.success('Your item is added to the cart!', {
                 position: "top-right",
-                autoClose: 1000, 
+                autoClose: 1000,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
- 
-                });
-        }   
+            });
+        }
     };
 
+
     return (
-      <div style={{backgroundColor:"rgb(153, 245, 245)"}}>
-        <ToastContainer style={{top:"50px", right:"20px"}} />
-        <Container>
-            <Row>
-                {data.filter((item) => item.title.toLowerCase().includes(query)).map((item, index) => (
-                    <Col key={index} xs={12} sm={6} md={4} lg={3}>
-                        <Card className='hello1' style={{ margin: "20px 0", height:"452.72px", width:"250px" }}>
-                            <Card.Img variant="top" src={item.image} style={{height:"298px", width:"248px", objectFit:'fill'}} />
-                            <Card.Body>
-                                <Card.Title><h6>{item.title}</h6></Card.Title>
-                                
-                                <h5>Price: <span style={{textDecoration:'line-through', fontSize:"15px", fontWeight:"lighter"}}>${item.oldPrice}</span> ${item.price}</h5>
-                                <div style={{marginBottom: '2px'}}>
-                                    <span style={{fontSize:"large"}}>
-                                        <StarRating rating={item.rating}/>
-                                    </span>
-                                </div>
-                                <Button className='btn btn-primary' onClick={() => HandleaddToCart(item)}>Add To Cart</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                ))}
-            </Row>
-         </Container> 
-      </div>
+        <div style={{ backgroundColor: "rgb(153, 245, 245)" }}>
+            <ToastContainer style={{ top: "50px", right: "20px" }} />
+            <Container>
+                <Row>
+                    {data.filter((item) => item.title.toLowerCase().includes(query)).map((item, index) => (
+                        <Col key={index} xs={12} sm={6} md={4} lg={3}>
+                            
+                            <Card className='hello1' style={{ margin: "20px 0", height: "452.72px", width: "250px" }}>
+                                <Card.Img variant="top" src={item.image} style={{ height: "298px", width: "248px", objectFit: 'fill' }} />
+                                <Card.Body>
+                                    <Card.Title><h6>{item.title}</h6></Card.Title>
+
+                                    <h5>Price: <span style={{ textDecoration: 'line-through', fontSize: "15px", fontWeight: "lighter" }}>${item.oldPrice}</span> ${item.price}</h5>
+                                    <div style={{ marginBottom: '2px' }}>
+                                        <span style={{ fontSize: "large" }}>
+                                            <StarRating rating={item.rating} />
+                                        </span>
+                                    </div>
+                                    <Button className='btn btn-primary' onClick={() => HandleaddToCart(item)}>Add To Cart</Button>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
+                </Row>
+            </Container>
+        </div>
 
     )
 }

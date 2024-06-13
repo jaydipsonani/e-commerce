@@ -1,3 +1,10 @@
 .hello1{
     text-align: center;
 }
+
+
+@media (max-width: 768px) {
+    .hello1{
+        text-align: center;
+    }
+}
