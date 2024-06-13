@@ -2,9 +2,9 @@
     text-align: center;
 }
 
-
-@media (max-width: 768px) {
+@media (max-width: 575px) {
     .hello1{
-        text-align: center;
-    }
+        display: flex;
+         justify-content: center;
+     }
 }
